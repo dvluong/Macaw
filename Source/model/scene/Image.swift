@@ -6,7 +6,7 @@ import AppKit
 import UIKit
 #endif
 
-open class Image: Node {
+open class ImageNode: Node {
 
     open let srcVar: Variable<String>
     open var src: String {

@@ -9,11 +9,11 @@ import UIKit
 #endif
 
 class ImageRenderer: NodeRenderer {
-    weak var image: Image?
+    weak var image: ImageNode?
 
     var renderedPaths: [CGPath] = [CGPath]()
 
-    init(image: Image, view: MView?, animationCache: AnimationCache?) {
+    init(image: ImageNode, view: MView?, animationCache: AnimationCache?) {
         self.image = image
         super.init(node: image, view: view, animationCache: animationCache)
     }

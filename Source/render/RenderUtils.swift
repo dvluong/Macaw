@@ -50,7 +50,7 @@ class RenderUtils {
             return ShapeRenderer(shape: shape, view: view, animationCache: animationCache)
         } else if let text = node as? Text {
             return TextRenderer(text: text, view: view, animationCache: animationCache)
-        } else if let image = node as? Image {
+        } else if let image = node as? ImageNode {
             return ImageRenderer(image: image, view: view, animationCache: animationCache)
         }
         fatalError("Unsupported node: \(node)")

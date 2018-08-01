@@ -806,12 +806,12 @@ open class SVGParser {
         return resultPoints
     }
 
-    fileprivate func parseImage(_ image: XMLIndexer, opacity: Double, pos: Transform = Transform(), clip: Locus?) -> Image? {
+    fileprivate func parseImage(_ image: XMLIndexer, opacity: Double, pos: Transform = Transform(), clip: Locus?) -> ImageNode? {
         guard let element = image.element, let link = element.allAttributes["xlink:href"]?.text else {
             return .none
         }
         let position = pos.move(dx: getDoubleValue(element, attribute: "x") ?? 0, dy: getDoubleValue(element, attribute: "y") ?? 0)
-        return Image(src: link, w: getIntValue(element, attribute: "width") ?? 0, h: getIntValue(element, attribute: "height") ?? 0, place: position, clip: clip, tag: getTag(element))
+        return ImageNode(src: link, w: getIntValue(element, attribute: "width") ?? 0, h: getIntValue(element, attribute: "height") ?? 0, place: position, clip: clip, tag: getTag(element))
     }
 
     fileprivate func parseText(_ text: XMLIndexer, textAnchor: String?, fill: Fill?, stroke: Stroke?, opacity: Double, fontName: String?, fontSize: Int?, fontWeight: String?, pos: Transform = Transform()) -> Node? {
@@ -1473,8 +1473,8 @@ open class SVGParser {
         if let text = referenceNode as? Text {
             return Text(text: text.text, font: text.font, fill: text.fill, stroke: text.stroke, align: text.align, baseline: text.baseline, place: pos, opaque: opaque, clip: clip, visible: visible, tag: tag)
         }
-        if let image = referenceNode as? Image {
-            return Image(src: image.src, xAlign: image.xAlign, yAlign: image.yAlign, aspectRatio: image.aspectRatio, w: image.w, h: image.h, place: pos, opaque: opaque, clip: clip, visible: visible, tag: tag)
+        if let image = referenceNode as? ImageNode {
+            return ImageNode(src: image.src, xAlign: image.xAlign, yAlign: image.yAlign, aspectRatio: image.aspectRatio, w: image.w, h: image.h, place: pos, opaque: opaque, clip: clip, visible: visible, tag: tag)
         }
         if let group = referenceNode as? Group {
             var contents = [Node]()
