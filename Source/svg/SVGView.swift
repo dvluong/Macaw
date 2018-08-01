@@ -13,6 +13,14 @@ open class SVGView: MacawView {
             node = (try? SVGParser.parse(path: fileName ?? "")) ?? Group()
         }
     }
+    
+    open var data: Data? {
+        didSet {
+            if let data = self.data {
+                node = (try? SVGParser.parse(data: data)) ?? Group()
+            }
+        }
+    }
 
     public init(node: Node, frame: CGRect) {
         super.init(frame: frame)

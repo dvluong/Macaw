@@ -8,4 +8,5 @@
 
 enum SVGParserError: Error {
     case noSuchFile(path: String)
+    case noData
 }

@@ -17,7 +17,19 @@ open class SVGParser {
         guard let fullPath = bundle.path(forResource: path, ofType: ofType) else {
             throw SVGParserError.noSuchFile(path: "\(path).\(ofType)")
         }
+        
         let text = try String(contentsOfFile: fullPath, encoding: String.Encoding.utf8)
+        return try SVGParser.parse(text: text)
+    }
+    
+    /// Parse an SVG file identified by the data, duh, how could you not even bother adding this?
+    /// - returns: Root node of the corresponding Macaw scene.
+    open class func parse(data: Data) throws -> Node {
+
+        guard let text = String(data: data, encoding: .utf8) else {
+            throw SVGParserError.noData
+        }
+        
         return try SVGParser.parse(text: text)
     }
 
